@@ -1,3 +1,25 @@
+function AddCategory() {
+    document.getElementById('popupCategory').classList.remove('hidden');
+}
+
+function closeCategory(){
+    document.getElementById('popupCategory').classList.add('hidden');
+}
+function DeleteCategory(id) {
+    document.getElementById(`popupDeleteCategory${id}`).classList.remove('hidden');
+}
+
+function closeDeleteCategory(){
+    document.getElementById('popupDeleteCategory').classList.add('hidden');
+}
+
+function UpdateCategory(id) {
+    document.getElementById(`popupUpdateCategory${id}`).classList.remove('hidden');
+}
+
+function closeUpdateCategory(){
+    document.getElementById('popupUpdateCategory').classList.add('hidden');
+}
 function signup() {
     document.getElementById('signup').classList.remove('hidden');
     document.getElementById('login').classList.add('hidden');

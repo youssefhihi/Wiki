@@ -11,7 +11,7 @@
      
       $this->view('pages/AuteurPages/home', $data);
     }
-    
-   
+
+  
   
   }
