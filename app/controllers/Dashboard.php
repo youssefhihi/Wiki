@@ -6,10 +6,12 @@ class Dashboard extends Controller
     private $CategoryModel;
     private $TagModel;
     private $UserModel;
+    private $WikiModel;
     public function __construct(){
         $this->TagModel = $this->model('tagDao');            
         $this->CategoryModel = $this->model('categoryDao');            
         $this->UserModel = $this->model('UserDao');            
+        $this->WikiModel = $this->model('WikiDao');            
     }
 
     public function index()
@@ -40,6 +42,15 @@ class Dashboard extends Controller
             'Tag' => $this->TagModel->getAllTags(),
         ];
         $this->view('pages/AdminPages/Tag', $data);
+         
+    }
+    public function Wiki()
+    {
+        $data = [
+            'title' => 'Wiki',
+            'Wiki' => $this->WikiModel->getAllWikis(),
+        ];
+        $this->view('pages/AdminPages/Wiki', $data);
          
     }
    

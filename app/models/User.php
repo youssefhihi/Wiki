@@ -9,14 +9,11 @@ class User {
     private $email;
     private $password;
     private $role;
+    private $Image;
+    private $Date;
 
 
-    public function __construct($user_id = null ,$username=null, $email = null , $password = null , $role = null ) {
-        $this->user_id = $user_id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-        $this->role = $role;
+    public function __construct() {
      
         
     }
@@ -79,6 +76,28 @@ class User {
     public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
+    }
+    public function getImage()
+    {
+        return $this->Image;
+    }
+
+    public function setImage($Image)
+    {
+        $this->Image = $Image;
+
+        return $this;
+    }
+    public function getDate()
+    {
+        return $this->Date;
+    }
+
+    public function setDate($Date)
+    {
+        $this->Date = $Date;
 
         return $this;
     }

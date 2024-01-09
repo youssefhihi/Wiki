@@ -23,6 +23,36 @@ class UserDao {
             return false;
         }
     }
+    public function UserAccount($id = 2)
+    {
+        try {
+
+            $this->db->query("SELECT * FROM user WHERE user_id = :id");
+            $this->db->bind(":id", $id);
+            $this->db->execute();
+            $userData = $this->db->fetchAll(PDO::FETCH_ASSOC);
+            $user = array();
+    
+            foreach ($userData as $data) {
+                $userObject = new User();
+                $userObject->setUser_Id($data['user_id']);
+                $userObject->setUsername($data['nom']); 
+                $userObject->setEmail($data['gmail']); 
+                $userObject->setDate($data['date']); 
+                $userObject->setImage($data['image']); 
+                $user[] = $userObject;
+            }
+    
+            return $user;
+            var_dump($user);
+            die();
+    
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
     
     
 
@@ -47,7 +77,8 @@ class UserDao {
     
     
 
-    public function login($email){
+    public function login($email)
+    {
         try {
             $this->db->query("SELECT * FROM user WHERE gmail = :email");
             $this->db->bind(":email", $email);
@@ -55,24 +86,26 @@ class UserDao {
             $userData = $this->db->fetchAll(PDO::FETCH_ASSOC);
     
             if (count($userData) > 0) {
-                $user = array();
+                $users = array();
                 foreach ($userData as $data) {
-                    $user[] = new User(
-                        $data['user_id'],
-                        $data['username'],
-                        $data['email'],
-                        $data['password'],
-                        $data['role']
-                    );
+                    $user = new User();
+                    $user->setUser_id($data['user_id'])
+                        ->setUsername($data['nom'])
+                        ->setEmail($data['gmail'])
+                        ->setPassword($data['password'])
+                        ->setRole($data['role']);
+                    $users[] = $user;
                 }
     
-                return $user;
+                return $users;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
         }
     }
+    
+    
     
 
     
