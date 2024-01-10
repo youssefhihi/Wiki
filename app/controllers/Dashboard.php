@@ -1,6 +1,6 @@
 <?php
 session_start();
- $id = $_SESSION['idUser'];
+ $id = $_SESSION['idUseer'];
 class Dashboard extends Controller
 {
 
@@ -133,6 +133,16 @@ public function UpdateCategory(){
             header('Location: ' . URLROOT . '/Dashboard/Tag');
         }else{
             header('Location: ' . URLROOT . '/Dashboard/Tag');
+        }
+    }
+
+    public function archiveWiki(){
+        if(isset($_POST['ArchiveWiki'])){
+            $id = $_POST['wikiID'];
+            $wiki = new wiki();
+            $wiki->setwikiID($id);
+           $this->WikiModel->ArchiveWiki($wiki);
+
         }
     }
 }

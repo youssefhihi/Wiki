@@ -43,25 +43,28 @@
         <div class="mt-8">
             <h3 class="text-xl font-semibold text-gray-800 mb-4">Your Wikis</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <?php foreach($data['wiki'] as $wiki){ ?>
                 <!-- Wiki Cards -->
                 <div class="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg">
                     <!-- Wiki Image -->
-                    <img class="w-full h-32 object-cover" src="https://placekitten.com/600/300" alt="Wiki Image">
+                    <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($wiki->getImageP() ); ?>"
+                alt="Wiki Image" class="w-full h-32 object-cover" />
                     <div class="p-6">
                         <div class="flex items-center">
                             <!-- Author Image -->
-                            <img class="w-10 h-10 rounded-full mr-4" src="https://placekitten.com/100/100" alt="Author Image">
+                            <img class="w-10 h-10 rounded-full mr-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($wiki->getAuthor()->getImage()); ?>" alt="Author Image">
                             <div class="text-sm">
-                                <p class="text-gray-600">Author Name</p>
-                                <p class="text-gray-400">Published on January 1, 2023</p>
+                            <p class="text-gray-600"><?php echo $wiki->getNameAuthor()->getUsername(); ?></p>
+
+                                <p class="text-gray-400">Published on <?php echo $wiki->getDate();?></p>
                             </div>
                         </div>
                         <!-- Wiki Title -->
-                        <h2 class="mt-4 text-xl font-semibold text-gray-800">Card Title</h2>
+                        <h2 class="mt-4 text-xl font-semibold text-gray-800"><?php echo $wiki->getTitle();?></h2>
                         <!-- Wiki Description -->
-                        <p class="mt-2 text-gray-600">Brief description or summary of the wiki content. It can span multiple lines.</p>
+                        <p class="mt-2 text-gray-600"><?php echo $wiki->getTexte();?></p>
                          <div class="mt-4">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-800">Read more</a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><?php echo $wiki->getCategorie()->getCategoryName();?></a>
                         </div>
                         <!-- Delete Icon -->
                          <div class="flex gap-2  justify-end">
@@ -73,7 +76,9 @@
                         
                     </div>
                 </div>
-                <!-- Repeat similar structure for other wiki cards -->
+               <?php 
+                }
+                ?>
             </div>
         </div>
 

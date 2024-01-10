@@ -17,7 +17,7 @@ class WikiDao{
 
     public function getAllWikis(){
         try{
-            $this->db->query("SELECT wiki.id, wiki.titre, wiki.texte, wiki.image, wiki.date, wiki.status,categorie.nom, user.nom FROM wiki join categorie ON categorie.categorie_id = wiki.categorieId join user ON user.user_id = wiki.userId Where wiki.status = 0");
+            $this->db->query("SELECT wiki.* ,categorie.nom, user.gmail FROM wiki join categorie ON categorie.categorie_id = wiki.categorieId join user ON user.user_id = wiki.userId Where wiki.status = 0");
             $result= $this->db->fetchAll();
             $wiki = array();
             foreach($result as $row){
@@ -25,10 +25,10 @@ class WikiDao{
                 $wiki_data->setWikiID($row->id);
                 $wiki_data->setTitle($row->titre);
                 $wiki_data->setTexte($row->texte);
-                $wiki_data->setImage($row->image);
-                $wiki_data->setDate($row->date);
+                $wiki_data->setImageP($row->image);
+                $wiki_data->setDate($row->date_post);
                 $wiki_data->setStatus($row->status);
-                $wiki_data->getNameAuthor()->setUsername($row->nom);            
+                $wiki_data->getAuthor()->setEmail($row->gmail);            
                 $wiki_data->getCategorie()->setCategoryName($row->nom);
                 array_push($wiki,$wiki_data);
             }     
@@ -39,39 +39,41 @@ class WikiDao{
  
         }
     }
-//   public function getUserWikis(User $id){
-//     try{
-//         $id = $id->getUser_id();
-//     $this->db->query("SELECT wiki.id, wiki.titre, wiki.texte, wiki.image, wiki.date, wiki.status,categorie.nom, user.nom FROM wiki join categorie ON categorie.categorie_id = wiki.categorieId join user ON user.user_id = wiki.userId Where user.user_id = :id AND wiki.status = 0");
-//     $this->db->bind(":id", $id);
-//     $result= $this->db->fetchAll();
-//     $wiki = array();
-//     foreach($result as $row){
-//         $wiki_data = new wiki();
-//         $wiki_data->setWikiID($row->id);
-//         $wiki_data->setTitle($row->titre);
-//         $wiki_data->setTexte($row->texte);
-//         $wiki_data->setImage($row->image);
-//         $wiki_data->setDate($row->date);
-//         $wiki_data->setStatus($row->status);
-//         $wiki_data->getNameAuthor()->setUsername($row->nom);            
-//         $wiki_data->getCategorie()->setCategoryName($row->nom);
-//         array_push($wiki,$wiki_data);
-//     }     
-//     return $wiki;
-// }
-// catch(Exception $e){
-//     error_log("Error in Archines wiki: " . $e->getMessage());
+  public function getAutorWikis($id){
+    try{
+       
+    $this->db->query("SELECT wiki.id, wiki.titre, wiki.texte, wiki.image, wiki.date_post, wiki.status,categorie.nom, user.nom ,user.image as imageP FROM wiki join categorie ON categorie.categorie_id = wiki.categorieId join user ON user.user_id = wiki.userId Where user.user_id = :id AND wiki.status = 0;");
+    $this->db->bind(":id", $id);
+    $result= $this->db->fetchAll();
+    $wiki = array();
+    foreach($result as $row){
+        $wiki_data = new wiki();
+        $wiki_data->setWikiID($row->id);
+        $wiki_data->setTitle($row->titre);
+        $wiki_data->setTexte($row->texte);
+        $wiki_data->setImageP($row->image);
+        $wiki_data->setDate($row->date_post);
+        $wiki_data->setStatus($row->status);
+        $wiki_data->getNameAuthor()->setUsername($row->nom);            
+        $wiki_data->getCategorie()->setCategoryName($row->nom);
+       $wiki_data->getAuthor()->setImage($row->imageP);
+        
+        array_push($wiki,$wiki_data);
+    }     
+    return $wiki;
+}
+catch(Exception $e){
+    error_log("Error in Archines wiki: " . $e->getMessage());
 
-// }
-// }
+}
+}
 
 
     public function ArchiveWiki(Wiki $wiki){
         try {
        $id= $wiki->getWikiID();
       
-        $req="UPDATE `wiki` SET `status`=0 WHERE id =:id";
+        $req="UPDATE `wiki` SET `status`= 1 WHERE id =:id";
         $this->db->query($req);
         $this->db->bind(':id',$id);
         $this->db->execute();

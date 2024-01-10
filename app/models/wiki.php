@@ -1,6 +1,6 @@
 <?php 
 class Wiki{
-    private $wikiID;
+      private $wikiID;
     private $title;
     private $Texte;
     private $image;
@@ -8,6 +8,7 @@ class Wiki{
     private $status;
     private $Email;
     private $categorieID;
+   
     private CategoryC $categorie;
     private User $Author;
     public function __construct(){
@@ -59,13 +60,13 @@ class Wiki{
         return $this;
     }
 
-    public function getImage()
+    public function getImageP()
     {
         return $this->image;
     }
 
    
-    public function setImage($image)
+    public function setImageP($image)
     {
         $this->image = $image;
 
@@ -119,4 +120,15 @@ class Wiki{
     {
         return $this->Email;
     }
+
+   public function getAuthor()
+   {
+    return $this->Author;
+   }
+
+   public function setAuthor($Author)
+   {
+    return $this->Author = $Author;
+    return $this;
+   }
 }

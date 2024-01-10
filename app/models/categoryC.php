@@ -23,6 +23,7 @@ class CategoryC{
 
      
     public function getCategoryName()
+   
     {
         return $this->categoryName;
     }

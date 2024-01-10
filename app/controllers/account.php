@@ -22,7 +22,8 @@ class account extends Controller
             'title' => 'Account',
             'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer']),
             'tag' => $this->TagModel->getAllTags(),
-            'category' => $this->CategoryModel->getAllCategories()
+            'category' => $this->CategoryModel->getAllCategories(),
+            'wiki' => $this->WikiModel->getAutorWikis($_SESSION['idUseer'])
             
         ];
         $this->view('pages/AuteurPages/account', $data);

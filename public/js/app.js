@@ -1,3 +1,11 @@
+function openArchiveWiki(id) {
+    document.getElementById(`popupArchiveWiki${id}`).classList.remove('hidden');
+}
+
+function closeArchiveWiki(){
+    document.getElementById('popupArchiveWiki').classList.add('hidden');
+}
+
 function AddCategory() {
     document.getElementById('popupCategory').classList.remove('hidden');
 }
