@@ -1,7 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; 
-if(!empty($data['error'])){
 
-}
 ?>
 
 
@@ -59,9 +57,9 @@ if(!empty($data['error'])){
             <input type="password" id="loginPassword" name="password" class="w-full p-3 border rounded-md" placeholder="Enter your password" >
             <p id="passwordLoginRegex" class=" hidden text-red-400 border-b-2 border-red-500 font-mono pl-3 ">Invalid password format</p>
             <?php
-            if(isset($data['IncorrectPass'])){
+            if(isset($data['error'])){
                 ?>
-            <p class=" hidden text-red-400 border-b-2 border-red-500 font-mono pl-3 "><?php echo $data['IncorrectPass'] ; ?> </p>
+            <p class=" text-red-400 border-b-2 border-red-500 font-mono pl-3 "><?php echo $data['error'] ; ?> </p>
                 <?php
             }
                 ?>

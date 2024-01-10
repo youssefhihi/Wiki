@@ -53,7 +53,9 @@
 
       $this->stmt->bindValue($param, $value, $type);
     }
-
+    public function lastInsertId(){
+      return $this->dbh->lastInsertId();
+  }
     // Execute the prepared statement
     public function execute(){
       return $this->stmt->execute();
@@ -75,9 +77,7 @@
     public function rowCount(){
       return $this->stmt->rowCount();
     }
-    public function lastInsertId(){
-      return $this->lastInsertId();
-    }
+   
     
   }
 

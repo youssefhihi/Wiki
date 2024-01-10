@@ -91,7 +91,7 @@ repeatPassword.addEventListener('input', function(e) {
 
 
 // ------------------------------------Login Form-----------------------------------------------
-// ------------------------------------Login Form-----------------------------------------------
+
 var loginForm = document.getElementById('loginForm');
 var loginEmail = document.getElementById('loginEmail');
 var loginPassword = document.getElementById('loginPassword');
@@ -103,11 +103,13 @@ var PasswordLoginHelp = document.getElementById('passwordLoginRegex');
 // Login Form Submit function
 loginForm.addEventListener('submit', e => {
   e.preventDefault();
+  console.log("hi");
   var passwordLoginValue = loginPassword.value;
-  if(EmailRegex.test(loginEmail.value) && PasswordRegex.test(passwordLoginValue)){
-
+  if (EmailRegex.test(loginEmail.value) && PasswordRegex.test(passwordLoginValue)) {
+    loginForm.submit();
   }
-})
+});
+
 
 // Email Error Check for Login
 loginEmail.addEventListener('input', function(e) {

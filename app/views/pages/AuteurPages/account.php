@@ -1,4 +1,4 @@
-<<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/burgerMenu.php'; ?>
 
 
@@ -6,16 +6,31 @@
        
             <?php foreach($data['userinfo'] as $user){ ?>
                 <div class="flex items-center space-x-4">
-                <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($song->getImage() ); ?>"
-                alt="Profile Picture" class="w-16 h-16 rounded-full"/> 
+                    <div class="flex">
+                <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($user->getImage() ); ?>"
+                alt="Profile Picture" class="w-16 h-16 rounded-full"/>
+                <i class="fas fa-edit text-black cursor-pointer" onclick="updateImage(<?php echo $user->getUser_id();?>)"></i>
+                </div>
                 <div>
+                    <input type="hidden" value="<?php echo $_SESSION['idUseer'];?>">
                     <h2 class="text-xl font-semibold text-gray-800"><?php echo $user->getUsername();?></h2>     
                     <p class="text-gray-400 "><?php echo $user->getEmail();?></p>
                 </div>
            </div>
-           <?php
-            }
-            ?>
+           <!-- popup Update Image Profile -->
+           <div id="popupUpdateImage<?php echo $user->getUser_id();?>" class="hidden fixed w-full h-full top-0 left-0 items-center justify-center bg-black bg-opacity-50 z-20">
+    <div class="bg-white mx-auto max-w-2xl p-14 m-48 rounded-md">
+        <form method="post" action="<?php echo URLROOT ?>/account/ImageProfile" enctype="multipart/form-data">
+            <input type="file" name="image">
+            <div class="flex space-x-5 justify-end">
+                <input type="hidden" name="iduser" value="<?php echo $_SESSION['idUseer']?>">
+                <button onclick="closeUpdateImage()" class="text-white text-2xl rounded-xl bg-red-700 w-28 h-14">Close</button>
+                <input type="submit" name="UpdateImage" value="Update" class="text-white text-2xl rounded-xl bg-black w-28 h-14">
+            </div>
+        </form>
+    </div>
+</div>
+          
 
         <div class="flex justify-end mt-4">
             <button onclick="openPopup()" class="px-4 py-2 border border-black bg-white text-black rounded-md hover:bg-black  hover:text-white">
@@ -68,50 +83,51 @@
 
     <div id="popup" class="hidden fixed w-full h-full top-0 left-0 items-center justify-center bg-black bg-opacity-50 z-20">
     <div class="bg-white p-8 rounded-md">
-        <form>
+        <form method="post" action="<?php echo URLROOT ?>/account/InsertWiki" enctype="multipart/form-data">
+        <input type="hidden" name="iduseer" value="<?php echo $_SESSION['idUseer'];?>">
             <input type="text" name="titre" placeholder="Enter the title of your wiki" class="w-full p-2 mb-4 border rounded-md">
-            <input type="text" name="text" placeholder="Enter your wiki" class="w-full p-2 mb-4 border rounded-md">
+            <input type="text" name="texte" placeholder="Enter your wiki" class="w-full p-2 mb-4 border rounded-md">
             <input type="file" name="image" placeholder="Image" class="w-full p-2 mb-4 border rounded-md">
             <select name="categorie" class="w-full p-2 mb-4 border rounded-md">
                 <option value="" selected disabled>Choose category</option>
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
-                <option value="category3">Category 3</option>
+                <?php foreach($data['category'] as $category){ ?>
+                <option value="<?php echo $category->getCategoryID();?>"><?php echo $category->getCategoryName();?></option>         
+              <?php  }?>
             </select>
 
             <div class="mb-4">
                 <p class="text-sm  mb-2">Select tags for your wiki:</p>
                 <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="tag" value="tag1">
-                        <span class="text-gray-800">Tag 1</span>
+                <?php foreach($data['tag'] as $tag){ ?>
+               <label class="flex items-center space-x-2">
+                        <input type="checkbox" name="tags[]" value="<?php echo $tag->getTagID();?>">
+                        <span  class="text-gray-800"><?php echo $tag->getTagName();?></span>
                     </label>
-
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="tag" value="tag2">
-                        <span class="text-gray-800">Tag 2</span>
-                    </label>
-
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="tag" value="tag3">
-                        <span class="text-gray-800">Tag 3</span>
-                    </label>
-                    
+                    <?php  }?>
                 </div>
             </div>
 
            
 
-            <button type="button" name="AddWiki" onclick="addWiki()" class="w-full p-2 bg-black text-white rounded-md hover:bg-gray-800">Add Wiki</button>
+            <input type="submit" name="AddWiki" value="Add Wiki" class="w-full p-2 bg-black text-white rounded-md hover:bg-gray-800">
         </form>
     </div>
     <div>
         <button onclick="closePopup()" class="absolute text-4xl top-0 right-2 text-black">&times;</button>
     </div>
 </div>
+<?php
+            }
+            ?>
 
 
+<script>
+function updateImage(id) {
+    document.getElementById('popupUpdateImage' + id).classList.remove('hidden');
+}
 
-<script src="../../assets/js/app.js"></script>
-</body>
-</html>
+function closeUpdateImage(){
+    document.getElementById('popupUpdateImage').classList.add('hidden');
+}
+</script>
+<?php require APPROOT . '/views/inc/footer.php'; ?>

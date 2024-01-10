@@ -5,6 +5,7 @@ function AddCategory() {
 function closeCategory(){
     document.getElementById('popupCategory').classList.add('hidden');
 }
+
 function DeleteCategory(id) {
     document.getElementById(`popupDeleteCategory${id}`).classList.remove('hidden');
 }

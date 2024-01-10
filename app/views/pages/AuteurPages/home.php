@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/burgerMenu.php'; ?>
+
 <div class="max-w-2xl mx-auto h-10 flex border rounded-xl overflow-hidden">
     <input type="text" placeholder="Search for anything" class="flex-1 h-full px-4 bg-white focus:outline-none">
     <div class="flex items-center justify-center h-full w-10 bg-white">

@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+ $id = $_SESSION['idUser'];
 class Dashboard extends Controller
 {
 

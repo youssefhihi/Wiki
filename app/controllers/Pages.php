@@ -1,4 +1,6 @@
 <?php
+session_start();
+$id = $_SESSION['idUseer'];
   class Pages extends Controller {
     public function __construct(){
      

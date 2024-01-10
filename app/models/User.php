@@ -11,10 +11,15 @@ class User {
     private $role;
     private $Image;
     private $Date;
-
-
-    public function __construct() {
-     
+ 
+    public function __construct($user_id = null ,$username=null, $email = null , $password = null ,$role =null, $Date= null , $Image = null) {
+        $this->user_id = $user_id;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->role =$role;
+        $this->Date = $Date;
+        $this->Image = $Image;
         
     }
     /**

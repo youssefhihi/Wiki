@@ -1,6 +1,5 @@
 <?php 
 class Wiki{
-    // `wikiID`, `title`, `Texte`, `image`, `dateCreated`, `status`, `ID_author`, `ID_Categorie`
     private $wikiID;
     private $title;
     private $Texte;
