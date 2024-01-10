@@ -2,7 +2,7 @@
     <div class="flex justify-between p-4">
         <div class="w-16 h-14 flex flex-col">
             <a href="index.php">
-                <img src="assets/images/logo-wiki.png" alt="logo">  
+                <img src="public/assets/images/logo-wiki.png" alt="logo">  
             </a>
         </div>
         <h1 class="text-xl text-black font-semibold">Lorem, ipsum dolor sit amet</h1>
@@ -29,7 +29,7 @@
         
             <div class="flex justify-end">
             <button class="border border-gray-800 bg-white text-black font-semibold  w-24 rounded-xl hover:bg-gray-800 hover:text-white ">
-               <a href= "">LogIn</a> 
+               <a href= "<?php echo URLROOT ?>/register">LogIn</a> 
             </button>
             </div>
         <?php }  ?>

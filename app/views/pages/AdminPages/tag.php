@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/SideBar.php'; ?>
-    
+<section class="p-10 sm:ml-64 mt-14">
         <div class="p-8">
             <div class="flex flex-col gap-10">
                 <div class="flex justify-between">
@@ -66,7 +66,7 @@
 </table>
 </div>
 </div>
-
+</section>
 
 
 <!-- ____________________________________Popup Add Tag___________________________________________________________ -->

@@ -1,22 +1,7 @@
-<!-- <body class="font-sans bg-gray-100">
-    <div id="MenuDashbord" class="bg-black text-white h-screen w-64 fixed top-0 left-0 rounded-r-2xl">
-        <div class="p-4">
-            <h1 class="text-2xl font-serif font-semibold"><i class="fas fa-chart-bar"></i> Dashboard</h1>
-        </div>
-        <nav class="space-y-4 mt-5 flex flex-col ">
-            <a href="#" class="p-4 hover:bg-gray-700"><i class="fas fa-home"></i> Dashboard</a>
-            <a href="#" class="p-4 hover:bg-gray-700"><i class="fas fa-th-large "></i> categories</a>
-            <a href="#" class="p-4 hover:bg-gray-700"><i class="fas fa-tags"></i>tags</a>
-                       
-            <a href="#" class="p-4 hover:bg-gray-700"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </nav>
-    </div>
-   
-    <div class="ml-64 ">   
-        <i onclick="OpenDashbordMenu()" class="fas fa-bars text-3xl text-black p-4 cursor-pointer"></i>   
-        <div class=" text-center">           
-                <h1 class="text-2xl font-semibold">Welcome Youssef Hihi</h1>
-        </div> -->
+
+        <div class=" mt-6  text-center">           
+                <h1 class="text-2xl font-semibold ">Welcome Admin </h1>
+        </div> 
         
 <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
    <span class="sr-only">Open sidebar</span>
@@ -31,42 +16,41 @@
 
          
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="<?php echo URLROOT ?>/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <i class="fas fa-chart-bar"></i>
                <span class="ms-3">Dashboard</span>
             </a>
          </li>
          
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="<?php echo URLROOT ?>/dashboard/category" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <i class="fas fa-th-large "></i> 
                <span class="flex-1 ms-3 whitespace-nowrap">Category</span>
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="<?php echo URLROOT ?>/dashboard/tag" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <i class="fas fa-tags"></i>
                <span class="flex-1 ms-3 whitespace-nowrap">Tag</span>
                </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="<?php echo URLROOT ?>/dashboard/wiki" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <i class="fas fa-file-alt text-2xl"></i>
                <span class="flex-1 ms-3 whitespace-nowrap">Wiki</span>
             </a>
          </li>
         
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            
+            <form method="post"  action="<?php echo URLROOT ?>/dashboard/logout" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <i class="fas fa-sign-out-alt"></i> 
-               <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
-            </a>
+               <input type="submit" name="logout" class="flex-1 ms-3 whitespace-nowrap" value="logout">
+            </form>
          </li>
         
       </ul>
    </div>
 </aside>
 
-<div class="p-4 sm:ml-64">
-  
-</div>
+

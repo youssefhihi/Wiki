@@ -21,7 +21,8 @@ class Dashboard extends Controller
             'title' => 'dashboard',
             'UserCount' => $this->UserModel->UsersCount(),
             'CategoryCount' => $this->CategoryModel->CategoryCount(),
-            'TagCount' => $this->TagModel->TagCount()
+            'TagCount' => $this->TagModel->TagCount(),
+            'wikiCount' => $this->WikiModel->WikiCount()
             
         ];
         $this->view('pages/AdminPages/dashboard', $data);
@@ -143,6 +144,14 @@ public function UpdateCategory(){
             $wiki->setwikiID($id);
            $this->WikiModel->ArchiveWiki($wiki);
 
+        }
+    }
+
+    public function logout(){
+        if(isset($_POST['logout'])){
+            session_destroy();
+            unset($_SESSION['idUseer']);
+            header('location:' . URLROOT );
         }
     }
 }

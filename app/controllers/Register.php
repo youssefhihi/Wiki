@@ -118,52 +118,7 @@ class Register extends Controller
         }
       }
 
-    // public function loginA()
-    // {
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login"])) {
-    //         $email = $_POST["email"];
-    //         $password = $_POST["password"];         
-    //         $patternEmail = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
-    //         $patternPassword = '/^(?=.*[0-9])(?!.*[^0-9a-zA-Z-_@])[a-zA-Z0-9-_@]{8,}$/';
-    //         $errorsL = array();
-    
-    //         if (!preg_match($patternEmail, $email)) {
-    //             array_push($errorsL, "Email is not valid.");
-    //         }
-    
-    //         if (!preg_match($patternPassword, $password)) {
-    //             array_push($errorsL, "Please use at least 8 characters");
-    //         }
-    
-    //         if (count($errorsL) > 0) {
-    //             $_SESSION['errorL'] = $errorsL;
-    //             header('location:' . URLROOT . '/Register');
-    //             exit();
-    //         }
-    //          else {
-    //              $Result = $this->UserModel->login($email);
-            
-    //             if ($Result && is_array($Result) && count($Result) > 0) {
-    //                 $user = $Result[0];
-    //                 if ($user && password_verify($password, $user->getPassword())) {
-    //                     if ($user->getrole() == 0) {
-    //                         header("location:" . URLROOT . "/dashboard");
-    //                         exit();  // Add exit() after the header to stop further execution
-    //                     } else if ($user->getrole() == 1) {
-    //                         header("location:" . URLROOT );
-    //                         exit();  // Add exit() after the header to stop further execution
-    //                     } else {
-    //                         echo "doesn't exist";
-    //                     }
-    //                 } else {                       
-    //                     $_SESSION['IncorrectPass'] = "password incorrect";
-    //                 }
-    //             }
-    //     }
-    // }else{
-    //     header('location:' .URLROOT. '/Register'); 
-    // }
-    // }           
+          
                     
  
                     
