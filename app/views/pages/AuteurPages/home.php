@@ -2,26 +2,30 @@
 <?php require APPROOT . '/views/inc/burgerMenu.php'; ?>
 
 <div class="max-w-2xl mx-auto h-10 flex rounded-2xl overflow-hidden">
-    <input type="text" id="searchInput" placeholder="Search for anything" class="flex-1 h-full px-4 bg-white focus:outline-none">
+    <input type="text" id="searchInput" placeholder="Search for anything" class="flex-1 h-full px-4 bg-white focus:outline-none border-none">
     <div class="flex items-center justify-center h-full w-10 bg-white">
         <i class="fas fa-search text-gray-400" id="searchIcon"></i>
     </div>
 </div>
-<div class="flex mx-auto max-w-2xl justify-between mt-8">
-    <?php foreach ($data['lastcategory'] as $category) { ?>
-        <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-            <?php echo $category->getCategoryName(); ?>
-        </button>
-    <?php } ?>
-    <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-       qjbscc</button>
+<div class="flex  flex-col mx-auto max-w-xl mt-14 border border-gray-600 rounded-xl p-4 bg-gray-100 shadow-md">
+    <p class="text-center text-2xl font-semibold text-gray-800">Explore the Newest Categories <i class="fas fa-fire text-yellow-500"></i></p>
+
+<div class="flex flex-wrap justify-center mt-4">
+        <?php foreach ($data['lastcategory'] as $category) { ?>
+            
+            <button class="m-2 px-4 py-2 flex space-x-2 bg-gray-500 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:shadow-outline-teal active:bg-teal-800">
+            <i class="fas fa-th-list pt-1"></i><P><?php echo $category->getCategoryName(); ?></P>
+            </button>
+        <?php } ?>
+    </div>
+</div>
 </div>
 
-    <div class="mt-8 grid  grid-cols-2 gap-5 md:grid-cols-1 ">
+<div class="mt-6 xl:p-20  lg:grid-cols-1 mx-auto grid grid-cols-1 md:grid-cols-2  gap-14 ">
         <?php foreach($data['wikis'] as $wiki){ ?>
-    <div class="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg">
-    <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($wiki->getImageP() ); ?>"
-                alt="Wiki Image" class="w-full h-32 object-cover" />
+    <div class=" bg-white rounded-xl hover:shadow-xl ">
+    <!-- <img  src="data:image/jpg;charset=utf8;base64,<?php // echo base64_encode($wiki->getImageP() ); ?>"
+                alt="Wiki Image" class="w-full rounded-xl  object-cover" /> -->
             <div class="p-6">
             <div class="flex items-center">
                 <img class="w-10 h-10 rounded-full mr-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($wiki->getAuthor()->getImage()); ?>" alt="Author Image">               

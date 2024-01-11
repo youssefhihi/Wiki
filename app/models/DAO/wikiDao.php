@@ -135,12 +135,12 @@ catch(Exception $e){
             $this->db->bind(':categorieID', $categorieID);
             $this->db->execute();
 
-            $this->db->query("DELETE FROM wiki_tag WHERE wikiId = :wikiId");
+            $this->db->query("DELETE FROM wiki_tag WHERE wikiID = :wikiId");
             $this->db->bind(':wikiId', $wikiId);
             $this->db->execute();
 
             foreach ($tags as $tag) {
-                $this->db->query("INSERT INTO wiki_tag (wikiId, tagId) VALUES (:wikiId, :tagId)");
+                $this->db->query("INSERT INTO wiki_tag (wikiID, tagID) VALUES (:wikiId, :tagId)");
                 $this->db->bind(':wikiId', $wikiId);
                 $this->db->bind(':tagId', $tag);
                 $this->db->execute();
@@ -173,7 +173,7 @@ catch(Exception $e){
 
     public function getWikisForVisitor(){
         try{
-            $this->db->query("SELECT wiki.*, user.nom, user.image as profile FROM wiki JOIN user ON user.user_id = wiki.userId WHERE wiki.status = 0 ORDER BY wiki.id DESC LIMIT 4");
+            $this->db->query("SELECT wiki.*, user.nom, user.image as profile FROM wiki JOIN user ON user.user_id = wiki.userId WHERE wiki.status = 0 ORDER BY wiki.id DESC LIMIT 6");
             $result= $this->db->fetchAll();
             $wiki = array();
             foreach($result as $row){
@@ -217,7 +217,15 @@ catch(Exception $e){
     public function wikiPage(wiki $wiki){
         try {
             $wikiID = $wiki->getWikiID();
-            $this->db->query("SELECT wiki.*, user.nom, user.image as profile FROM wiki JOIN user ON user.user_id = wiki.userId WHERE wiki.status = 0 AND wiki.id = :id");
+            $this->db->query("SELECT wiki.*, categorie.nom as category, GROUP_CONCAT(tag.nom) AS tags, user.nom as username, user.image as profile
+            FROM wiki
+            JOIN categorie ON categorie.categorie_id = wiki.categorieId
+            JOIN wiki_tag ON wiki_tag.wikiID = wiki.id
+            JOIN tag ON tag.tag_id = wiki_tag.tagID
+            JOIN user ON user.user_id = wiki.userId
+            WHERE wiki.status = 0 AND wiki.id = :id
+            GROUP BY wiki.id;
+            ");
             $this->db->bind(":id", $wikiID);
             $result = $this->db->fetchAll();  
     
@@ -230,8 +238,10 @@ catch(Exception $e){
                 $wiki_data->setTexte($row->texte);
                 $wiki_data->setImageP($row->image);
                 $wiki_data->setDate($row->date_post);
-                $wiki_data->getNameAuthor()->setUsername($row->nom);            
+                $wiki_data->getNameAuthor()->setUsername($row->username);            
                 $wiki_data->getAuthor()->setImage($row->profile);
+                $wiki_data->getCategorie()->setCategoryName($row->category);
+                $wiki_data->getTag()->setTagName($row->tags);
     
                 $wikiList[] = $wiki_data;  
             }

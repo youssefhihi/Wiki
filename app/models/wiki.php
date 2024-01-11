@@ -11,9 +11,11 @@ class Wiki{
    
     private CategoryC $categorie;
     private User $Author;
+    private TagC $Tag;
     public function __construct(){
         $this->Author=new User();
         $this->categorie=new CategoryC();
+        $this->Tag=new TagC();
     }
     
     
@@ -129,6 +131,15 @@ class Wiki{
    public function setAuthor($Author)
    {
     return $this->Author = $Author;
+    return $this;
+   }
+   public function getTag()
+   {
+    return $this->Tag;
+   }
+   public function setTag($Tag)
+   {
+    return $this->Tag = $Tag;
     return $this;
    }
 }
