@@ -69,6 +69,34 @@ class account extends Controller
         }
     }
 
+    // Controller method for handling wiki update
+public function UpdateWiki() {
+    if (isset($_POST['UpdateWiki'])) {
+        // Get the form data
+        $wikiId = $_POST['wikiID'];
+        $title = $_POST['titre'];
+        $texte = $_POST['texte'];
+        $image = $_FILES['image'];
+         $tmp_name = $_FILES['image']['tmp_name'];
+        $image = file_get_contents($tmp_name);    // Assuming you're uploading an image
+        $categorieID = $_POST['categorie'];
+        $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
+
+        $this->WikiModel->UpdateWiki($wikiId, $title, $texte, $image, $categorieID, $tags);
+      
+    }
+}
+
+public function DeleteWiki()
+{
+    if(isset($_POST['DeleteWiki'])){
+        $wikiID = $_POST['idWiki'];
+        $wiki = new wiki;
+        $wiki->setWikiID($wikiID);  
+        $this->WikiModel->DeleteWiki($wiki);
+    }
+}
+
     
     
     

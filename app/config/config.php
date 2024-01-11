@@ -10,6 +10,6 @@ define('DB_NAME', 'wiki');
 // 
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root public
-define('URLROOT', 'http://localhost/WIKI');
+define('URLROOT', 'http://localhost/wiki');
 // Site Name
 define('SITENAME', 'lyrically');

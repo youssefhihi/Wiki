@@ -22,6 +22,24 @@ class CategoryDao {
         }
     }
 
+    public function getcategoriesForVisitor()
+    {
+        try {
+            $this->db->query("SELECT * FROM `categorie` Limit 3");
+            $result = $this->db->fetchAll();
+            $categories = array();
+            foreach ($result as $row) {
+                $category = new CategoryC();
+                $category->setCategoryID($row->categorie_id);
+                $category->setCategoryName($row->nom);
+                array_push($categories, $category);
+            }
+            return $categories;
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
     public function getAllCategories()
     {
         try {
