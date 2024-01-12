@@ -194,20 +194,19 @@ catch(Exception $e){
           }
     }
                 
-    public function search(wiki $wiki ,tagC $tags , categoryC $categories){
+    public function search($search){
             try{
 
-                $titre = '%' . $wiki->getTitle() . '%';
-                $texte = '%' . $wiki->getTexte() . '%';
-                $tag = '%' . $tags->getTagName() . '%';
-                $category = '%' . $categories->getCategoryName() . '%';
-                //search wiki
-                $this->db->query("SELECT wiki.*,user.nom,user.image AS profile FROM   wiki  JOIN user ON user.user_id = wiki.userId LEFT JOIN  wiki_tag ON wiki.id = wiki_tag.wikiID  LEFT JOIN   tag ON wiki_tag.tagID = tag.tag_id   LEFT JOIN     categorie ON wiki.categorieId = categorie.categorie_id  WHERE   wiki.status = 0 AND (wiki.titre LIKE :titre OR wiki.texte LIKE :texte OR  tag.nom LIKE :tag OR  categorie.nom LIKE :category)");
-                $this->db->bind(":titre",$titre);
-                $this->db->bind(":texte", $texte);
+                $titre = '%' .$search . '%';        
+                $tag = '%' . $search . '%';
+                $category = '%' . $search. '%';
+                // search wiki
+                $this->db->query("SELECT wiki.*,user.nom,user.image AS profile FROM wiki JOIN user ON user.user_id = wiki.userId LEFT JOIN wiki_tag ON wiki.id = wiki_tag.wikiID LEFT JOIN tag ON wiki_tag.tagID = tag.tag_id LEFT JOIN categorie ON wiki.categorieId = categorie.categorie_id WHERE wiki.status = 0 AND (wiki.titre LIKE :titre OR tag.nom LIKE :tag OR categorie.nom LIKE :category)");
+                $this->db->bind(":titre",$titre); 
                 $this->db->bind(":tag",$tag);         
                 $this->db->bind(":category",$category);    
-                $this->db->execute();     
+                $res = $this->db->fetchAll();
+                return $res;    
             }catch (Exception $e) {
                         echo $e->getMessage();
                     }

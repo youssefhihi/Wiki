@@ -25,17 +25,19 @@ session_start();
 
     public function searchAction()
     {
-        $searchInput= $_POST['search'] ;
-        $searchResults = $this->WikiModel->search($searchInput);
-        header('Content-Type: application/json');
-        echo json_encode($searchResults);
-        exit;
+      if(isset($_POST['input'])){
+       $searchInput= $_POST['input'] ;
+        $searchResults = $this->WikiModel->search($searchInput); 
+        // var_dump($searchResults);
+      
+        return $searchResults;
+      }
+        
     }
     public function wikipage()
 {
     if (isset($_POST['page'])) {
-        $wikiID = $_POST["idWikiPage"];
-        
+        $wikiID = $_POST["idWikiPage"];       
         $res = $this->WikiModel->wikiPage($wikiID);     
         if ($res) {
           $data = [

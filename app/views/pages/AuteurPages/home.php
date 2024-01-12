@@ -7,7 +7,11 @@
         <i class="fas fa-search text-gray-400" id="searchIcon"></i>
     </div>
 </div>
-<div id="searchresult"></div>
+<div id="searchresult" >
+      
+    </div>
+    
+
 <div class="flex  flex-col mx-auto max-w-xl mt-14 border border-gray-600 rounded-xl p-4 bg-gray-100 shadow-md">
     <p class="text-center text-2xl font-semibold text-gray-800">Explore the Newest Categories <i class="fas fa-fire text-yellow-500"></i></p>
 
@@ -63,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     searchResult.innerHTML = xhr.responseText;
                     searchResult.style.display = "block";
-                    console.log("ana hna");
                 }
             };
 
