@@ -1,11 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/SideBar.php'; ?>
-<section class="p-10 sm:ml-64 mt-14">
-        <div class="p-8">
+<section class="p-10 sm:ml-64 md:mt-14">
+        <div class="md:p-8">
             <div class="flex flex-col gap-10">
                 <div class="flex justify-between">
-                <h1 class=" text-black text-3xl">Wikis Category</h1>
-                <button onclick="AddCategory()" class="px-4 py-2 border border-black bg-white text-black rounded-md hover:bg-black  hover:text-white">
+                <h1 class=" text-black text-2xl mb-10 md:mb-0 md:text-3xl">Wikis Category</h1>
+                <button onclick="AddCategory()" class="px-4 md:py-2 border border-black bg-white text-black rounded-md hover:bg-black  hover:text-white">
                 Add Category
             </button>   
         </div>

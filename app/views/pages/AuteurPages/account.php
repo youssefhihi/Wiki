@@ -1,7 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php require APPROOT . '/views/inc/burgerMenu.php'; ?>
 
-
+<?php if(isset($data['empty'])){   ?> 
+                    <p class="text-red-600 border-b-2 font-serif"><?php $data['empty']?> </p>
+                    <?php }?> 
 <div class="container mx-auto mt-8 p-8 bg-gray-200 rounded-md shadow-lg">
             <?php foreach($data['userinfo'] as $user){ ?>
                  <!--Affiche information about user  -->
@@ -109,9 +111,9 @@
                             <input type="file" name="image" value="<?php echo base64_encode($wiki->getImageP() ); ?>" placeholder="Image" class="w-full p-2 mb-4 border rounded-md">
                             <select name="categorie" class="w-full p-2 mb-4 border rounded-md">
                                 
-                                <option value="" selected ><?php echo $wiki->getCategorie()->getCategoryName();?></option>
+                                <option value="" selected ></option>
                                 <?php foreach($data['category'] as $category){ ?>
-                                <option value="<?php echo $category->getCategoryID();?>"><?php echo $category->getCategoryName();?></option>                                     
+                                <option  value="<?php echo $category->getCategoryID();?>"><?php echo $category->getCategoryName();?></option>                                     
                                 <?php  }?>
                             
                             </select>
@@ -127,6 +129,7 @@
                                 <?php  }?>
                                 </div>
                             </div>
+
                             <div class="flex flex-col gap-5">
                                 <input type="submit" name="UpdateWiki" value="Update Wiki" class="w-full p-2 border border-black text-black rounded-md hover:bg-black hover:text-white">
                                 <button onclick="closeUpdateWiki(<?php echo $wiki->getWikiID();?>)" class="w-full p-2 border border-black text-white bg-gray-700 rounded-md">Close </button>
@@ -148,7 +151,8 @@
     <div id="popup" class="hidden fixed w-full h-full top-0 left-0 items-center justify-center bg-black bg-opacity-50 z-20">
     <div class="bg-white max-w-3xl mx-auto m-16 p-8 rounded-md">
             <form method="post" action="<?php echo URLROOT ?>/account/InsertWiki" enctype="multipart/form-data">
-                
+
+               
                 <input type="hidden" name="iduseer" value="<?php echo $_SESSION['idUseer'];?>">               
                 <input type="text" name="titre" placeholder="Enter the title of your wiki" class="w-full p-2 mb-4 border rounded-md">
                 <input type="text" name="texte" placeholder="Enter your wiki" class="w-full p-2 mb-4 border rounded-md">
@@ -182,6 +186,6 @@
             }
             ?>
 
-
+<script> </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

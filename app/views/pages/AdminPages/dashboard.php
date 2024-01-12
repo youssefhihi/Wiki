@@ -2,7 +2,7 @@
 <?php require APPROOT . '/views/inc/SideBar.php'; ?>
 <section class="p-10 sm:ml-64 ">
       
-        <div class="p-8 grid grid-cols-3 gap-16">
+        <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-16">
            <div class="w-64 h-40 flex flex-col gap-3 items-center justify-center text-center bg-gray-300 rounded-xl border border-gray-300 transform transition-transform hover:scale-110">
                 <p class="text-3xl text-black font-semibold"><i class="fas fa-users text-2xl"></i> Users</p>
                 <p class="text-2xl font-semibold"><?php echo $data['UserCount'];?></p>

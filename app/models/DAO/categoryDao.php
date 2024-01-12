@@ -25,7 +25,8 @@ class CategoryDao {
     public function getcategoriesForVisitor()
     {
         try {
-            $this->db->query("SELECT * FROM `categorie` Limit 3");
+            $this->db->query("SELECT * FROM categorie ORDER BY date_C DESC LIMIT 3;
+            ");
             $result = $this->db->fetchAll();
             $categories = array();
             foreach ($result as $row) {
@@ -78,7 +79,7 @@ class CategoryDao {
         try {
             $category_id=$category->getCategoryID();
             $category_name=$category->getCategoryName();
-            $this->db->query("UPDATE categorie SET nom = :name WHERE categorie_id = :id");
+            $this->db->query("UPDATE categorie SET nom = :name, date_C = CURRENT_TIMESTAMP WHERE categorie_id = :id");
             $this->db->bind(":id", $category_id);
             $this->db->bind(":name", $category_name);
             $this->db->execute();

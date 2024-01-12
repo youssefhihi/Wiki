@@ -202,7 +202,7 @@ catch(Exception $e){
                 $tag = '%' . $tags->getTagName() . '%';
                 $category = '%' . $categories->getCategoryName() . '%';
                 //search wiki
-                $this->db->query("SELECT wiki.*, user.nom, user.image AS profile FROM wiki JOIN user ON user.user_id = wiki.userId LEFT JOIN wiki_tag ON wiki.id = wiki_tag.wikiID LEFT JOIN tag ON wiki_tag.tagID = tag.tag_id LEFT JOIN categorie ON wiki.categorieId = categorie.categorie_id WHERE wiki.status = 0 AND (wiki.titre LIKE :titre OR wiki.texte LIKE :texte OR tag.nom LIKE :tag OR categorie.nom LIKE :category)");
+                $this->db->query("SELECT wiki.*,user.nom,user.image AS profile FROM   wiki  JOIN user ON user.user_id = wiki.userId LEFT JOIN  wiki_tag ON wiki.id = wiki_tag.wikiID  LEFT JOIN   tag ON wiki_tag.tagID = tag.tag_id   LEFT JOIN     categorie ON wiki.categorieId = categorie.categorie_id  WHERE   wiki.status = 0 AND (wiki.titre LIKE :titre OR wiki.texte LIKE :texte OR  tag.nom LIKE :tag OR  categorie.nom LIKE :category)");
                 $this->db->bind(":titre",$titre);
                 $this->db->bind(":texte", $texte);
                 $this->db->bind(":tag",$tag);         
@@ -214,9 +214,9 @@ catch(Exception $e){
 
     }
 
-    public function wikiPage(wiki $wiki){
+    public function wikiPage($wikiID){
         try {
-            $wikiID = $wiki->getWikiID();
+            
             $this->db->query("SELECT wiki.*, categorie.nom as category, GROUP_CONCAT(tag.nom) AS tags, user.nom as username, user.image as profile
             FROM wiki
             JOIN categorie ON categorie.categorie_id = wiki.categorieId

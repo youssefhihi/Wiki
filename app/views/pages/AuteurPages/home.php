@@ -46,46 +46,31 @@
     </div>
 
 <script>
-// document.addEventListener('DOMContentLoaded', function () {
-//     const searchInput = document.getElementById('searchInput');
-//     const searchIcon = document.getElementById('searchIcon');
-//     const searchResultsContainer = document.getElementById('searchResults');
+document.addEventListener("DOMContentLoaded", function () {
+    var liveSearchInput = document.getElementById("searchWiki");
+    var searchResult = document.getElementById("searchresult");
 
-//     // Attach event listener to the search input
-//     searchInput.addEventListener('input', function () {
-//         const searchTerm = searchInput.value.trim();
+    liveSearchInput.addEventListener("keyup", function () {
+        var input = liveSearchInput.value;
 
-//         // Clear previous search results
-//         searchResultsContainer.innerHTML = '';
+        if (input !== "") {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", <?php APPROOT ?> '/AuteurPages/home.php', true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-//         // Perform AJAX request to fetch search results
-//         if (searchTerm !== '') {
-//             // You can use libraries like Axios or the Fetch API for AJAX requests
-//             // Here, I'll use the Fetch API as an example
-//             fetch(`/search?q=${searchTerm}`)
-//                 .then(response => response.json())
-//                 .then(data => {
-//                     // Handle the received data and display it in the searchResultsContainer
-//                     // You can use a templating engine or manipulate the DOM directly
-//                     data.forEach(result => {
-//                         // Create a list item for each search result
-//                         const resultElement = document.createElement('li');
-                        
-//                         // Add content to the list item (adjust according to your data structure)
-//                         resultElement.innerHTML = `
-//                             <h3>${result.title}</h3>
-//                             <p>${result.description}</p>
-//                             <!-- Add more properties as needed -->
-//                         `;
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    searchResult.innerHTML = xhr.responseText;
+                    searchResult.style.display = "block";
+                }
+            };
 
-//                         // Append the list item to the container
-//                         searchResultsContainer.appendChild(resultElement);
-//                     });
-//                 })
-//                 .catch(error => console.error('Error fetching search results:', error));
-//         }
-//     });
-// });
+            xhr.send("input=" + encodeURIComponent(input));
+        } else {
+            searchResult.style.display = "none";
+        }
+    });
+});
 
 </script>
 

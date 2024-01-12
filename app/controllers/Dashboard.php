@@ -28,6 +28,15 @@ class Dashboard extends Controller
         $this->view('pages/AdminPages/dashboard', $data);
          
     }
+    public function side()
+    {
+        $data = [
+          
+            'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer'])          
+        ];
+        $this->view('inc/SideBar', $data);
+         
+    }
     public function Category()
     {
         $data = [

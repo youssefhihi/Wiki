@@ -1,6 +1,6 @@
 
         <div class=" mt-6  text-center">           
-                <h1 class="text-2xl font-semibold ">Welcome Admin </h1>
+                <h1 class="text-2xl font-semibold "> Welcome Admin </h1>
         </div> 
         
 <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -12,8 +12,22 @@
 
 <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-500 dark:bg-gray-800">
-      <ul class="space-y-2 font-medium">
-
+      <ul class="space-y-2 font-medium ">
+      <!-- <?php foreach($data['userinfo'] as $user){ 
+        // var_dump($data['userinfo']);?>
+                 Affiche information about user  -->
+            <!--<div class="flex flex-col items-center space-x-4">
+                
+                    <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($user->getImage() ); ?>"
+                    alt="Profile Picture" class="w-28 h-28 rounded-full"/>
+             
+                <div>
+                   
+                    <h2 class="text-xl font-semibold text-gray-800"><?php echo $user->getUsername();?></h2>     
+                    <p class="text-gray-400 "><?php echo $user->getEmail();?></p>
+                </div>
+            </div>
+            <?php } ?> -->
          
          <li>
             <a href="<?php echo URLROOT ?>/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -52,5 +66,6 @@
       </ul>
    </div>
 </aside>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
 

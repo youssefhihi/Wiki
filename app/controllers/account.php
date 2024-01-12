@@ -24,6 +24,7 @@ class account extends Controller
             'tag' => $this->TagModel->getAllTags(),
             'category' => $this->CategoryModel->getAllCategories(),
             'wiki' => $this->WikiModel->getAutorWikis($_SESSION['idUseer'])
+        
             
         ];
         $this->view('pages/AuteurPages/account', $data);
@@ -35,38 +36,50 @@ class account extends Controller
 
     public function InsertWiki(){
         if(isset($_POST['AddWiki'])){
-            $title = $_POST['titre'];
-            $id = $_POST['iduseer'];
-            $text = $_POST['texte'];
-            $image = $_FILES['image'];
-            $tmp_name = $_FILES['image']['tmp_name'];
-            $image = file_get_contents($tmp_name);   
-            $categoryID = $_POST['categorie'];
-            $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
-            $this->WikiModel->AddWiki($title, $text, $image, $categoryID, $id ,$tags);
+            if (isset($_POST['titre']) && isset($_POST['iduseer']) && isset($_POST['texte']) && isset($_FILES['image']) && isset($_POST['categorie']) && isset($_POST['tags'])) {
+                $title = $_POST['titre'];
+                $id = $_POST['iduseer'];
+                $text = $_POST['texte'];
+                $image = $_FILES['image'];
+                $tmp_name = $_FILES['image']['tmp_name'];
+                $image = file_get_contents($tmp_name);   
+                $categoryID = $_POST['categorie'];
+                $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
+                
+                $this->WikiModel->AddWiki($title, $text, $image, $categoryID, $id, $tags);
+            } else {  
+                $empty = "You have an empty column, please fill in all required fields.";
+                $data = ['empty' => $empty];
+                $this->view('pages/AuteurPages/account', $data);
+                
+            }
+    
+            header("location:" . URLROOT . "/account");
         }
+        header("location:" . URLROOT . "/account");
+
     }
+    
     
   
 
     public function ImageProfile(){
         if(isset($_POST['UpdateImage'])){
-            try {
+          
                 $id = $_SESSION['idUseer'];
                 $image = $_FILES['image'];
                 $tmp_name = $_FILES['image']['tmp_name'];
                 $image = file_get_contents($tmp_name);    
                 $success = $this->UserModel->imageProfile($id, $image);   
                 if ($success) {
-                   echo "image khdama";
+                  header("location:" . URLROOT . "/account");
                 } else {
-                    echo "makhdamach";
+                header("location:" . URLROOT . "/account");
                 }
-            } catch (Exception $e) {
-                echo $e->getMessage();
-               
-            }
-        }
+           
+        
+    }
+    
     }
 
     // Controller method for handling wiki update
@@ -84,7 +97,9 @@ public function UpdateWiki() {
 
         $this->WikiModel->UpdateWiki($wikiId, $title, $texte, $image, $categorieID, $tags);
       
-    }
+    } header("location:" . URLROOT . "/account");
+
+header("location:" . URLROOT . "/account");
 }
 
 public function DeleteWiki()
@@ -94,7 +109,9 @@ public function DeleteWiki()
         $wiki = new wiki;
         $wiki->setWikiID($wikiID);  
         $this->WikiModel->DeleteWiki($wiki);
+        header("location:" . URLROOT . "/account");
     }
+    header("location:" . URLROOT . "/account");
 }
 
     
