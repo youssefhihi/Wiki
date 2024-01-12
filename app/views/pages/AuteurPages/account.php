@@ -155,7 +155,8 @@
                
                 <input type="hidden" name="iduseer" value="<?php echo $_SESSION['idUseer'];?>">               
                 <input type="text" name="titre" placeholder="Enter the title of your wiki" class="w-full p-2 mb-4 border rounded-md">
-                <input type="text" name="texte" placeholder="Enter your wiki" class="w-full p-2 mb-4 border rounded-md">
+                <textarea name="texte" id="" cols="30" placeholder="Enter your wiki" rows="4" class="w-full p-2 mb-4 border rounded-md"></textarea>
+                <!-- <input type="text" name="texte" placeholder="Enter your wiki" class="w-full p-2 mb-4 border rounded-md"> -->
                 <input type="file" name="image" placeholder="Image" class="w-full p-2 mb-4 border rounded-md">
                 <select name="categorie" class="w-full p-2 mb-4 border rounded-md">
                     <option value="" selected disabled>Choose category</option>

@@ -23,7 +23,8 @@ class account extends Controller
             'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer']),
             'tag' => $this->TagModel->getAllTags(),
             'category' => $this->CategoryModel->getAllCategories(),
-            'wiki' => $this->WikiModel->getAutorWikis($_SESSION['idUseer'])
+            'wiki' => $this->WikiModel->getAutorWikis($_SESSION['idUseer']),
+           
         
             
         ];

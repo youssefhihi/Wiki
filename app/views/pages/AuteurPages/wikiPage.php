@@ -34,7 +34,7 @@ foreach($data['oneWiki'] as $wiki) {
     <h2 class="text-3xl font-semibold text-gray-800 mb-2 md:w-2/3"><?php echo $wiki->getTitle(); ?></h2>
     <p class="text-xl font-semibold md:w-1/3 text-right"> Category : <span class="font-mono text-gray-800 underline"><?php   echo  $wiki->getCategorie()->getCategoryName(); ?></span></p>
 </div>
-    <div class=" flex flex-col md:flex-row  mt-8">
+    <div class=" flex flex-col md:flex-row  md:space-x-3 mt-8">
     <div class="w-full md:w-1/2 pl-0 md:pl-4 mt-4 md:mt-0">
             <!-- Wiki Image -->
             <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($wiki->getImageP()); ?>" alt="Wiki Image" class="w-full rounded-xl object-cover" />

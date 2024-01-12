@@ -2,11 +2,12 @@
 <?php require APPROOT . '/views/inc/burgerMenu.php'; ?>
 
 <div class="max-w-2xl mx-auto h-10 flex rounded-2xl overflow-hidden">
-    <input type="text" id="searchInput" placeholder="Search for anything" class="flex-1 h-full px-4 bg-white focus:outline-none border-none">
+    <input type="text" name="search" id="searchWiki" placeholder="Search for anything" class="flex-1 h-full px-4 bg-white focus:outline-none border-none">
     <div class="flex items-center justify-center h-full w-10 bg-white">
         <i class="fas fa-search text-gray-400" id="searchIcon"></i>
     </div>
 </div>
+<div id="searchresult"></div>
 <div class="flex  flex-col mx-auto max-w-xl mt-14 border border-gray-600 rounded-xl p-4 bg-gray-100 shadow-md">
     <p class="text-center text-2xl font-semibold text-gray-800">Explore the Newest Categories <i class="fas fa-fire text-yellow-500"></i></p>
 
@@ -55,13 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (input !== "") {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", <?php APPROOT ?> '/AuteurPages/home.php', true);
+            xhr.open("POST", "pages/searchAction", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     searchResult.innerHTML = xhr.responseText;
                     searchResult.style.display = "block";
+                    console.log("ana hna");
                 }
             };
 
