@@ -35,7 +35,7 @@
             <div id="popupDeleteTag<?php echo $Tag->getTagID();?>"  class="hidden  fixed w-full h-full top-0 left-0 items-center justify-center bg-black bg-opacity-50 z-20">
                 <div class="bg-white mx-auto max-w-2xl p-14  m-48     rounded-md">
                     <form  method="post" action="<?php echo URLROOT ?>/dashboard/DeleteTag" >
-                        <h1 class="text-black text-3xl font-bold">Are you sure <?php echo $Tag->getTagID();?>?</h1>
+                        <h1 class="text-black text-3xl mb-4 font-semibold">Are you sure you want to delete  <span class=" underline font-mono "><?php echo $Tag->getTagName();?> </span> tag ?</h1>
                         <div class="flex space-x-5 justify-end">
                             <input type="hidden" name="idTag" value="<?php echo $Tag->getTagID();?>">
                             <button  onclick="closeDeleteTag()" class=" text-white text-2xl rounded-xl bg-blue-700 w-28 h-14">Close</button>
@@ -53,7 +53,7 @@
                         <input type="text" name="name" value="<?php echo $Tag->getTagName();?>" placeholder="Enter the Name of your Tag" class="w-full p-2 mb-4 border rounded-md">
                         <div class="flex space-x-5 justify-end">
                             <button  onclick="closeUpdateTag()" class=" text-white text-2xl rounded-xl bg-blue-700 w-28 h-14">Close</button>
-                            <input type="submit" name="UpdateTag" class="w-full p-2 bg-black text-white rounded-md hover:bg-gray-800" value="Update Tag">             
+                            <input type="submit" name="UpdateTag" class="w-full p-2 border border-black  text-white rounded-md bg-gray-900 hover:bg-white hover:text-black" value="Update Tag">             
                         </div>
                     </form>
                 </div>
@@ -76,7 +76,7 @@
         <div class="bg-white mx-auto max-w-2xl p-14  m-48     rounded-md">
             <form method="post" action="<?php echo URLROOT ?>/dashboard/InsertTag">
                 <input type="text" name="name" placeholder="Enter the Name of your Tag" class="w-full p-2 mb-4 border rounded-md">
-                <input type="submit" name="AddTag" class="w-full p-2 bg-black text-white rounded-md hover:bg-gray-800" value="Add Tag">             
+                <input type="submit" name="AddTag" class="w-full p-2 border border-black bg-gray-900 text-white rounded-md hover:bg-white hover:text-black" value="Add Tag">             
             </form>
         
         <button onclick="closeTag()" class=" text-4xl absolute top-48 right-80  text-black">&times;</button>

@@ -34,7 +34,7 @@
             <input type="password" id="confirmPassword" name="confirmPassword" class="w-full p-3 border rounded-md" placeholder="Confirm your password" >
             <p id="confirmPasswordRegex"  class=" hidden text-red-400 border-b-2 border-red-500 font-mono pl-3 ">Password doesn't match</p>
         </div>
-        <input type="submit" name="signup" value="Sign Up" class="w-full border-2 text-xl border-black bg-black text-white p-2 rounded-md hover:bg-white hover:text-black">
+        <input type="submit" name="signup" value="Sign Up" class="w-full border-2 text-xl border-black bg-gray-900 text-white p-2 rounded-md hover:bg-white hover:text-black">
         </form>
 
     <p class="text-gray-600 text-sm mt-4 text-center">Already have an account? <span onclick="login()" class="text-indigo-700 cursor-pointer">Login here</span></p>
@@ -66,7 +66,7 @@
 
         </div>
 
-        <input type="submit" name="login" value="Login" class="w-full border-2 text-xl border-black bg-black text-white p-2 rounded-md hover:bg-white hover:text-black">
+        <input type="submit" name="login" value="Login" class="w-full border-2 text-xl border-black bg-gray-900 text-white p-2 rounded-md hover:bg-white hover:text-black">
         </form>
 
 <p class="text-gray-600 text-sm mt-4 text-center">Don't have an account? <span onclick="signup()" class="text-indigo-700 cursor-pointer">Sign up here</span></p>

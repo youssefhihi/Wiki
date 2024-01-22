@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<?php require APPROOT . '/views/inc/SideBar.php'; ?>
+<?php require APPROOT . '/views/inc/SideBar.php';?>
 <section class="p-10 sm:ml-64 ">
       
         <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-16">
@@ -10,6 +10,10 @@
            <div class="w-64 h-40 flex flex-col gap-3 items-center justify-center text-center bg-gray-300 rounded-xl border border-gray-300 transform transition-transform hover:scale-110">
                 <p class="text-3xl text-black font-semibold"><i class="fas fa-file-alt text-2xl"></i> Wikis</p>
                 <p class="text-2xl font-semibold"><?php echo $data['wikiCount'];?> </p>
+           </div>
+           <div class="w-64 h-40 flex flex-col gap-3 items-center justify-center text-center bg-gray-300 rounded-xl border border-gray-300 transform transition-transform hover:scale-110">
+                <p class="text-3xl text-black font-semibold"><i class="fas fa-file-alt text-2xl"></i> Wikis Archived</p>
+                <p class="text-2xl font-semibold"><?php echo $data['wikiCountArchived'];?> </p>
            </div>
            <div class="w-64 h-40 flex flex-col gap-3 items-center justify-center text-center bg-gray-300 rounded-xl border border-gray-300 transform transition-transform hover:scale-110">
                 <p class="text-3xl text-black font-semibold"><i class="fas fa-th-large text-2xl"></i> Categories</p>

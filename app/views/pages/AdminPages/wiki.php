@@ -10,26 +10,26 @@
         <table class="w-full border border-collapse border-gray-300">
     <thead>
         <tr class="bg-gray-200">
-            <th class="border p-2">Number</th>
-            <th class="border p-2">Autor</th>
-            <th class="border p-2">Wiki Title</th>
-            <th class="border p-2">Texte</th>
-            <th class="border p-2">Image</th>
-            <th class="border p-2">Archive</th>
+            <th class="border-2 p-2">Number</th>
+            <th class="border-2 p-2">Autor</th>
+            <th class="border-2 p-2">Wiki Title</th>
+            <th class="border-2 p-2">Texte</th>
+            <th class="border-2 p-2">Image</th>
+            <th class="border-2 p-2">Archive</th>
         </tr>
     </thead>
     <tbody>
         <?php 
             foreach($data['Wiki'] as $wiki){
         ?>
-        <tr class="border">
-            <td class="border p-2"><?php echo $wiki->getWikiID();?></td>
-            <td class="border p-2"><?php echo $wiki->getAuthor()->getEmail();?></td>
-            <td class="border p-2"><?php echo $wiki->getTitle();?></td>
-            <td class="border p-2"><?php echo $wiki->getTexte();?></td>
-            <td class="border p-2"><img class="w-10 h-10 rounded-full mr-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($wiki->getImageP());?>" alt=" Image"> </td>
-            <td class="border p-2 flex justify-around">                
-            <i onclick="openArchiveWiki(<?php echo $wiki->getWikiID();?>)" class="fas fa-archive"></i>
+        <tr class="border-2">
+            <td class="border-2 p-2"><?php echo $wiki->getWikiID();?></td>
+            <td class="border-2 p-2"><?php echo $wiki->getAuthor()->getEmail();?></td>
+            <td class="border-2 p-2"><?php echo $wiki->getTitle();?></td>
+            <td class="border-2 p-2"><?php echo $wiki->getTexte();?></td>
+            <td class="border-2 p-2"><img class="w-10 h-10 rounded-full mr-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($wiki->getImageP());?>" alt=" Image"> </td>
+            <td class="border-2 p-2 flex-col  justify-around">                
+            <i onclick="openArchiveWiki(<?php echo $wiki->getWikiID();?>)" class="fas fa-archive ml-4"></i>
 
             </td>    
            

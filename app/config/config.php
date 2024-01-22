@@ -13,3 +13,8 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/wiki');
 // Site Name
 define('SITENAME', 'lyrically');
+
+
+
+ 
+ 

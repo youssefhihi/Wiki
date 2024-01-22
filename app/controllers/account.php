@@ -1,10 +1,12 @@
 <?php
 session_start();
 $id = $_SESSION['idUseer'];
+if(!isset($_SESSION['idUseer'])){
+    header("location:" . URLROOT );
+}
+
 class account extends Controller
 {
-
-   
     private $CategoryModel;
     private $TagModel;
     private $UserModel;
@@ -24,9 +26,7 @@ class account extends Controller
             'tag' => $this->TagModel->getAllTags(),
             'category' => $this->CategoryModel->getAllCategories(),
             'wiki' => $this->WikiModel->getAutorWikis($_SESSION['idUseer']),
-           
-        
-            
+                       
         ];
         $this->view('pages/AuteurPages/account', $data);
          

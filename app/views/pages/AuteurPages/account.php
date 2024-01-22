@@ -29,7 +29,7 @@
                         <div class="flex space-x-5 justify-end">
                             <input type="hidden" name="iduser" value="<?php echo $_SESSION['idUseer']?>">
                             <button onclick="closeUpdateImage()" class="text-white text-2xl rounded-xl bg-red-700 w-28 h-14">Close</button>
-                            <input type="submit" name="UpdateImage" value="Update" class="text-white text-2xl rounded-xl bg-black w-28 h-14">
+                            <input type="submit" name="UpdateImage" value="Update" class="text-white text-2xl rounded-xl bg-gray-900 w-28 h-14">
                         </div>
                     </form>
                 </div>
@@ -47,7 +47,9 @@
         <div class="mt-8">
             <h3 class="text-xl font-semibold text-gray-800 mb-4">Your Wikis</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <?php foreach($data['wiki'] as $wiki){ ?>
+                <?php foreach($data['wiki'] as $wiki){ 
+                    $TagChecked =  $wiki->getTag()->getTagName();
+                ?>
                 <!-- Wiki Cards -->
                 <div class="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-xl">
                    
@@ -80,6 +82,7 @@
                             <i class="fas fa-edit text-black text-2xl cursor-pointer" onclick="updateWiki(<?php echo $wiki->getWikiID();?>)"></i>
                         </div>                                                
                     </div>
+                 
                 </div>
  <!-- ---------------------------------------popup Delete Wiki----------------------------------- -->
 
@@ -100,41 +103,45 @@
                 </div>
 <!-- ---------------------------------------popup Update Wiki----------------------------------- -->
 
-                <div id="popupUpdateWiki<?php echo $wiki->getWikiID();?>" class="hidden fixed w-full h-full top-0 left-0 items-center justify-center bg-black bg-opacity-50 z-20">
-                    <div class="bg-white max-w-3xl mx-auto m-16 p-8 rounded-md">
+
+                <div id="popupUpdateWiki<?php echo $wiki->getWikiID();?>" class=" hidden fixed w-full h-full top-0 left-0 items-center justify-center bg-black bg-opacity-50 z-20">
+                    <div class="bg-white max-w-3xl mx-auto m-10 p-10    rounded-md">
                         <form method="post" action="<?php echo URLROOT ?>/account/UpdateWiki" enctype="multipart/form-data">
-                            
+                           
                             <input type="hidden" name="iduseer" value="<?php echo $_SESSION['idUseer'];?>">
                             <input type="text" name="titre" value="<?php echo $wiki->getTitle();?>" placeholder="Enter the title of your wiki" class="w-full p-2 mb-4 border rounded-md">
                             <input type="hidden" name="wikiID" value="<?php echo $wiki->getWikiID();?>">
                             <input type="text" name="texte" value="<?php echo $wiki->getTexte();?>" placeholder="Enter your wiki" class="w-full p-2 mb-4 border rounded-md">
-                            <input type="file" name="image" value="<?php echo base64_encode($wiki->getImageP() ); ?>" placeholder="Image" class="w-full p-2 mb-4 border rounded-md">
+                            <input type="file" name="image" value="<?php echo base64_encode($wiki->getImageP()) ; ?>" placeholder="Image" class="w-full p-2 mb-4 border rounded-md">
                             <select name="categorie" class="w-full p-2 mb-4 border rounded-md">
-                                
-                                <option value="" selected ></option>
-                                <?php foreach($data['category'] as $category){ ?>
-                                <option  value="<?php echo $category->getCategoryID();?>"><?php echo $category->getCategoryName();?></option>                                     
-                                <?php  }?>
-                            
+                                <?php foreach($data['category'] as $category): ?>
+                                    <option value="<?php echo $category->getCategoryID(); ?>" <?php echo ($category->getCategoryName() == $wiki->getCategorie()->getCategoryName()) ? 'selected' : ''; ?>>
+                                        <?php echo $category->getCategoryName(); ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
-
-                            <div class="mb-4">
-                                <p class="text-sm  mb-2">Select tags for your wiki:</p>
-                                <div class="flex flex-wrap gap-2">
-                                <?php foreach($data['tag'] as $tag){ ?>
+                            <p class="text-sm  mb-2">Select tags for your wiki:</p>
+                            <div class=" mb-3 flex flex-wrap gap-2">
+                            <?php foreach($data['tag'] as $tag){ ?>
                                 <label class="flex items-center space-x-2">
-                                    <input type="checkbox"  name="tags[]" value="<?php echo $tag->getTagID();?>">
-                                    <span  class="text-gray-800"><?php echo $tag->getTagName();?></span>
+                                <?php if (in_array($tag->getTagName(), explode(',', $TagChecked))) { ?>
+                                <input type="checkbox" name="tags[]" value="<?php echo $tag->getTagID();?>" checked>
+                                <span class="text-gray-800"><?php echo $tag->getTagName();?></span>
+                            <?php } else { ?>
+                                <input type="checkbox" name="tags[]" value="<?php echo $tag->getTagID();?>">
+                                <span class="text-gray-800"><?php echo $tag->getTagName();?></span>
+                            <?php } ?>
+
                                 </label>
-                                <?php  }?>
-                                </div>
+                            <?php } ?>
                             </div>
 
                             <div class="flex flex-col gap-5">
-                                <input type="submit" name="UpdateWiki" value="Update Wiki" class="w-full p-2 border border-black text-black rounded-md hover:bg-black hover:text-white">
-                                <button onclick="closeUpdateWiki(<?php echo $wiki->getWikiID();?>)" class="w-full p-2 border border-black text-white bg-gray-700 rounded-md">Close </button>
+                                <input type="submit" name="UpdateWiki" value="Update Wiki" class="w-full p-2 border border-black  text-white rounded-md bg-gray-900 hover:bg-white  hover:text-black">
+                                
                             </div>
                         </form>
+                        <button onclick="closeUpdateWiki(<?php echo $wiki->getWikiID();?>)" class=" mt-5 w-full p-2 border border-black hover:text-white hover:bg-gray-900 rounded-md">Close </button>
                     </div>
                     
                 </div>

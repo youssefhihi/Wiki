@@ -111,13 +111,17 @@ class UserDao {
             $this->db->query("SELECT * FROM user WHERE gmail = :email");
             $this->db->bind(":email", $email);
             $userData = $this->db->single(PDO::FETCH_ASSOC);
-                    $user = new User();
+                  if($userData) {
+                $user = new User();
                     $user->setUser_id($userData->user_id);
                     $user->setUsername($userData->nom);
                     $user->setEmail($userData->gmail);
                     $user->setPassword($userData->password);
                     $user->setRole($userData->role);     
                 return $user;
+            }else{
+                return null;
+            }
         } catch (PDOException $e) {
             echo $e->getMessage();
             return null;

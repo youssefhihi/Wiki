@@ -17,6 +17,7 @@ class Register extends Controller
         $this->view('pages/AuteurPages/register', $data);
     }
     
+    
     public function signupA()
     {
         if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirmPassword"])) {
@@ -90,9 +91,11 @@ class Register extends Controller
               if(password_verify($_POST["password"],$userfound->getPassword())){
              $_SESSION['idUseer'] = $userfound->getUser_id();
                 if ($userfound->getrole() == 0) {
+                    $_SESSION['roleAdmin'] = $userfound->getrole();
                     header("location:" . URLROOT . "/dashboard");
                     exit();  
                 } else if ($userfound->getrole() == 1) {
+                    $_SESSION['roleAutheur'] = $userfound->getrole();
                     header("location:" . URLROOT );
                     exit();  
                 } else {
@@ -100,17 +103,22 @@ class Register extends Controller
                 }
               }else{
                 $Err = "Password Incorrect";
-                $data = ['error' => $Err];
+                $data = ['error' => $Err,
+                     'title' => 'login'
+                ];
                 $this->view('pages/AuteurPages/register', $data);
               }
             }else{
               $Err = "User not found";
-              $data = ['error' => $Err];
+              $data = ['error' => $Err,
+              'title' => 'login'
+            ];
               $this->view('pages/AuteurPages/register', $data);
             }
           }else{
             $Err = "please write your email and correct password!";
-            $data = ['error' => $Err];
+            $data = ['error' => $Err,
+            'title' => 'login'];
             $this->view('pages/AuteurPages/register', $data);
           }
         }else{

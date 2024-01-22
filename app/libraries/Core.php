@@ -40,6 +40,7 @@ class Core
 
     // Check for the second part of URL
     // METHODE CONTROLER 
+  
     if (isset($url[1])) {
       // Check to see if method exists in the controller
       if (method_exists($this->currentController, $url[1])) {
@@ -56,15 +57,19 @@ class Core
     call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
   }
 
+ 
   public function getUrl()
-  { 
+  {  
     // htacces url index.php?url=$1
     if (isset($_GET['url'])) {
       // Annuler espace chenge /
+      
       $url = rtrim($_GET['url'], '/');
       //supprmer les slach  "/"final
       $url = filter_var($url, FILTER_SANITIZE_URL);
       //Array 
+   
+      
       $url = explode('/', $url);
       return $url;
     }

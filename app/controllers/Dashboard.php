@@ -1,6 +1,13 @@
 <?php
 session_start();
  $id = $_SESSION['idUseer'];
+ if(!isset($_SESSION['idUseer'])){
+    header("location:" . URLROOT );
+}
+if(isset($_SESSION['roleAutheur'])){
+    header("location:" . URLROOT );
+}
+
 class Dashboard extends Controller
 {
 
@@ -22,25 +29,20 @@ class Dashboard extends Controller
             'UserCount' => $this->UserModel->UsersCount(),
             'CategoryCount' => $this->CategoryModel->CategoryCount(),
             'TagCount' => $this->TagModel->TagCount(),
-            'wikiCount' => $this->WikiModel->WikiCount()
+            'wikiCount' => $this->WikiModel->WikiCount(),
+            'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer']),   
+            'wikiCountArchived' => $this->WikiModel->WikiCountArchived()
             
         ];
         $this->view('pages/AdminPages/dashboard', $data);
          
     }
-    public function side()
-    {
-        $data = [
-          
-            'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer'])          
-        ];
-        $this->view('inc/SideBar', $data);
-         
-    }
+    
     public function Category()
     {
         $data = [
             'title' => 'Category',
+            'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer']),  
             'category' => $this->CategoryModel->getAllCategories(),
         ];
         $this->view('pages/AdminPages/category', $data);
@@ -51,6 +53,7 @@ class Dashboard extends Controller
         $data = [
             'title' => 'Tag',
             'Tag' => $this->TagModel->getAllTags(),
+            'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer']),  
         ];
         $this->view('pages/AdminPages/Tag', $data);
          
@@ -60,6 +63,7 @@ class Dashboard extends Controller
         $data = [
             'title' => 'Wiki',
             'Wiki' => $this->WikiModel->getAllWikis(),
+            'userinfo'=> $this->UserModel->UserAccount($_SESSION['idUseer']),  
         ];
         $this->view('pages/AdminPages/Wiki', $data);
          
@@ -152,7 +156,9 @@ public function UpdateCategory(){
             $wiki = new wiki();
             $wiki->setwikiID($id);
            $this->WikiModel->ArchiveWiki($wiki);
-
+           header('Location: ' . URLROOT . '/Dashboard/wiki');
+        }else{
+            header('Location: ' . URLROOT . '/Dashboard/wiki');
         }
     }
 
@@ -160,6 +166,7 @@ public function UpdateCategory(){
         if(isset($_POST['logout'])){
             session_destroy();
             unset($_SESSION['idUseer']);
+            unset($_SESSION['role']);
             header('location:' . URLROOT );
         }
     }

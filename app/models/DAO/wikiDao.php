@@ -29,6 +29,17 @@ class WikiDao{
             return false;
         }
     }
+    public function WikiCountArchived(){
+        try {
+            $this->db->query("SELECT COUNT(*) as count FROM wiki where status = 1");
+            $this->db->execute();
+            $result = $this->db->single(); 
+            return $result->count; 
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 
     public function getAllWikis(){
         try{
@@ -57,7 +68,7 @@ class WikiDao{
   public function getAutorWikis($id){
     try{
        
-    $this->db->query("SELECT wiki.id, wiki.titre, wiki.texte, wiki.image, wiki.date_post, wiki.status,categorie.nom, user.nom as nomAuthor ,user.image as imageP FROM wiki join categorie ON categorie.categorie_id = wiki.categorieId join user ON user.user_id = wiki.userId Where user.user_id = :id AND wiki.status = 0;");
+    $this->db->query("SELECT wiki.id, wiki.titre, wiki.texte, wiki.image, wiki.date_post, wiki.status,categorie.nom,GROUP_CONCAT(tag.nom) As tags, user.nom as nomAuthor ,user.image as imageP FROM wiki join categorie ON categorie.categorie_id = wiki.categorieId JOIN wiki_tag ON wiki_tag.wikiID = wiki.id JOIN tag ON tag.tag_id = wiki_tag.tagID join user ON user.user_id = wiki.userId Where user.user_id = :id AND wiki.status = 0 GROUP BY wiki.id;");
     $this->db->bind(":id", $id);
     $result= $this->db->fetchAll();
     $wiki = array();
@@ -71,6 +82,7 @@ class WikiDao{
         $wiki_data->setStatus($row->status);
         $wiki_data->getNameAuthor()->setUsername($row->nomAuthor);            
         $wiki_data->getCategorie()->setCategoryName($row->nom);
+        $wiki_data->getTag()->setTagName($row->tags);
        $wiki_data->getAuthor()->setImage($row->imageP);
         
         array_push($wiki,$wiki_data);
@@ -194,22 +206,30 @@ catch(Exception $e){
           }
     }
                 
-    public function search($search){
-            try{
-
-                $titre = '%' .$search . '%';        
-                $tag = '%' . $search . '%';
-                $category = '%' . $search. '%';
-                // search wiki
-                $this->db->query("SELECT wiki.*,user.nom,user.image AS profile FROM wiki JOIN user ON user.user_id = wiki.userId LEFT JOIN wiki_tag ON wiki.id = wiki_tag.wikiID LEFT JOIN tag ON wiki_tag.tagID = tag.tag_id LEFT JOIN categorie ON wiki.categorieId = categorie.categorie_id WHERE wiki.status = 0 AND (wiki.titre LIKE :titre OR tag.nom LIKE :tag OR categorie.nom LIKE :category)");
-                $this->db->bind(":titre",$titre); 
-                $this->db->bind(":tag",$tag);         
-                $this->db->bind(":category",$category);    
-                $res = $this->db->fetchAll();
-                return $res;    
-            }catch (Exception $e) {
-                        echo $e->getMessage();
-                    }
+    public function search(string $search){
+        try {
+            $searchTerm = '%' . $search . '%';
+        
+        $this->db->query("
+                SELECT DISTINCT wiki.*, user.nom, user.image AS profile
+                FROM wiki
+                JOIN user ON user.user_id = wiki.userId
+                LEFT JOIN wiki_tag ON wiki.id = wiki_tag.wikiID
+                LEFT JOIN tag ON wiki_tag.tagID = tag.tag_id
+                LEFT JOIN categorie ON wiki.categorieId = categorie.categorie_id
+                WHERE wiki.status = 0
+                AND (wiki.titre LIKE :titre OR tag.nom LIKE :tag OR categorie.nom LIKE :category)
+            ");
+        
+            $this->db->bind(":titre", $searchTerm);
+            $this->db->bind(":tag", $searchTerm);
+            $this->db->bind(":category", $searchTerm);
+           $this->db->execute();
+            $res = $this->db->fetchAll();
+            return $res;
+        } catch ( PDOException $e) {
+            echo $e->getMessage();
+        }
 
     }
 
