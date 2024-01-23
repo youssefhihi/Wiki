@@ -29,7 +29,7 @@ form.addEventListener('submit', e => {
   }
 })
 
-// Full Name Error Check
+// Full Name Error  Check
 
 fullName.addEventListener('input', function(e) { 
   var currentValue = e.target.value;

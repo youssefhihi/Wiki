@@ -66,7 +66,7 @@ function toggleMenu() {
 
 
 
-// Close the generic popup if clicked outside of it
+// Close the generic popup if clicked outside of itt
 window.onclick = function (event) {
     var popup = document.getElementById("popup");         
     if (event.target == popup) {
