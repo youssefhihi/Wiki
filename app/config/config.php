@@ -7,7 +7,6 @@ define('DB_NAME', 'wiki');
 
 // App Root
 // app
-// 
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root public
 define('URLROOT', 'http://localhost/wiki');
