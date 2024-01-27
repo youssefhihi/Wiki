@@ -15,7 +15,7 @@
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-600 dark:bg-gray-800">
       <ul class="space-y-5 font-medium ">
       
-             <!-- Affiche information about user  -->
+             <!--  Affiche information about user  -->
             <div class="flex flex-col items-center space-x-4 mb-5">
                 
                     <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($user->getImage() ); ?>"
