@@ -6,6 +6,7 @@ define('DB_PASS', '');
 define('DB_NAME', 'wiki');
 
 //App Root
+
 //app
 define('APPROOT', dirname(dirname(__FILE__)));
 //URL Root public
