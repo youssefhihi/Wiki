@@ -1,5 +1,5 @@
 ## WIKI
--Découvrez notre plateforme Wiki conviviale, offrant aux administrateurs une gestion aisée des catégories et des tags. Les auteurs bénéficient d'une liberté totale pour créer, modifier et supprimer leur contenu. Notre front office met l'accent sur une interface utilisateur intuitive avec une inscription simplifiée, une recherche efficace et des affichages dynamiques des derniers wikis. Rejoignez-nous pour une expérience collaborative où la création, la recherche et le partage de connaissances sont simples et captivants. Bienvenue sur le site où chacun peut contribuer facilement.
+-Découvrez notre plateforme Wiki conviviale, offrant aux administrateurs une gestion aisée des catégories et des tags. Les auteurs bénéficient d'une liberté totale pour créer,  modifier et supprimer leur contenu. Notre front office met l'accent sur une interface utilisateur intuitive avec une inscription simplifiée, une recherche efficace et des affichages dynamiques des derniers wikis. Rejoignez-nous pour une expérience collaborative où la création, la recherche et le partage de connaissances sont simples et captivants. Bienvenue sur le site où chacun peut contribuer facilement.
 
 ## Presentation
 
@@ -18,5 +18,6 @@ Server:_ PHP, SQL, MySql
 ## Author
 
 - [Youssef Hihi](https://github.com/youssefhihi)
+  
 
 
